@@ -9,8 +9,10 @@ pics = byId("banner").getElementsByTagName("div"),
 dots=byId("dots").getElementsByTagName("span"),
 prev=byId("prev"),
 next=byId("next"),
-len=pics.length;
-
+len=pics.length,
+subMenu=byId("sub-menu"),
+menuItems = byId("menu-content").getElementsByTagName("div"),
+innerbox =subMenu.getElementsByClassName("inner-box");
 
 
 function slideImg(){
@@ -49,7 +51,26 @@ next.onclick=function(){
     if(index>=len) index =0;
     ChanneImg();
  }
+for(var q=0;q<menuItems.length;q++){
+    menuItems[q].setAttribute("data-index",q);
+   
+    menuItems[q].onmouseover = function(){
+       var idx = this.getAttribute("data-index");
+       //先遍历所有子菜单,将每一个都隐藏
+       for(var j=0 ;j<innerbox.length;j++){
+        innerbox[j].style.display= "none";
+       }
+    
+      subMenu.className="sub-menu";
+      innerbox[idx].style.display="block";
+    }
 }
+
+}
+
+
+
+
 function ChanneImg(){
     for(var i=0;i<len;i++){
         pics[i].style.display="none";

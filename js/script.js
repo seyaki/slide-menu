@@ -11,6 +11,7 @@ prev=byId("prev"),
 next=byId("next"),
 len=pics.length,
 subMenu=byId("sub-menu"),
+menu =byId("menu-content"),
 menuItems = byId("menu-content").getElementsByTagName("div"),
 innerbox =subMenu.getElementsByClassName("inner-box");
 
@@ -51,6 +52,7 @@ next.onclick=function(){
     if(index>=len) index =0;
     ChanneImg();
  }
+
 for(var q=0;q<menuItems.length;q++){
     menuItems[q].setAttribute("data-index",q);
    
@@ -58,14 +60,25 @@ for(var q=0;q<menuItems.length;q++){
        var idx = this.getAttribute("data-index");
        //先遍历所有子菜单,将每一个都隐藏
        for(var j=0 ;j<innerbox.length;j++){
+        subMenu.className="sub-menu";
         innerbox[j].style.display= "none";
+        menuItems[j].style.background =" none";
        }
-    
-      subMenu.className="sub-menu";
+      
+      menuItems[idx].style.background ="rgba(0,0,0,0.1)";
       innerbox[idx].style.display="block";
     }
 }
 
+menu.onmouseout = function(){
+   subMenu.className ="sub-menu hide";
+}
+subMenu.onmouseover=function(){
+    this.className ="sub-menu";
+}
+subMenu.onmouseout=function(){
+    this.className="sub-menu hide";
+}
 }
 
 
